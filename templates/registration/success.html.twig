@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register Success{% endblock %}
+
+{% block body %}
+
+
+    {% for flash_msg in app.flashes('success') %}
+        <div class="alert alert-primary" role="alert">{{ flash_msg }}</div>
+    {% endfor %}
+
+    <h1>Success</h1>
+
+{% endblock %}
