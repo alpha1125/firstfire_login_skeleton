@@ -11,12 +11,27 @@
   - USER entries
 
 
+### UI/UX
+- Using bootstrap 5.3.1 (as of 2023-07-31)
+- Nav menu
+  - Logged in, you see one set of menus
+    - As an admin, you see additional menus
+  - Logged out
+    - you can reset password
+    - you can sign up (disable, by removing entries to the registration route)
+
+
 TODOs:
 - EasyAdmin::UserCrudController
+  - User CRUD crontroller
+    - needs to detail view
+    - manage roles
+      - Only Super User, and revoke and appoint admins
+      - Other Admins are not able to do so (avoid chaos, rogue)
   - Extend to manage roles
     - SuperUser can add/remove admins
-    - invite new user. Trigger a new user's email invite.
-    - RESET password from ADMIN, will get user to reset email.
+      - invite new user. Trigger a new user's email invite.
+      - RESET password from ADMIN, will get user to reset email.
 
 ## Requirements:
 - Mysql
@@ -42,13 +57,13 @@ $> php bin/console doctrine:fixtures:load
 $> php bin/console messenger:consume async
 ```
 
-* Cronjob:
+* Cronjob
+  * OR alternatively see: https://symfony.com/doc/current/messenger.html#supervisor-configuration
+
 ```cronexp
 # every minute -- cron will not start a new instance until this one closes
-# OR alt. see: https://symfony.com/doc/current/messenger.html#supervisor-configuration
 * * * * * php bin/console messenger:consume async
 
 # Remove expired password requests
 @daily php bin/console reset-password:remove-expired
 ```
-
